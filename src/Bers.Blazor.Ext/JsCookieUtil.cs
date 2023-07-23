@@ -6,6 +6,9 @@ public interface IJsCookieUtil
 {
   public Task SetValue(string key, string value, TimeSpan timeSpan);
   public Task SetValue(string key, string value);
+  public Task RemoveValue(string key);
+  public Task Clear();
+
   public Task<string> GetValue(string key, string defaultValue = "");
   public void SetDefaultExpireTime(TimeSpan timeSpan);
 }
@@ -30,6 +33,14 @@ public class JsCookieUtil : IJsCookieUtil
 
   public async Task SetValue(string key, string value) {
     await SetCookie($"{key}={value}; expires={_expires}; path=/");
+  }
+
+  public async Task RemoveValue(string key) {
+    await SetCookie($"{key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/");
+  }
+
+  public async Task Clear() {
+    await SetCookie($"expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/");
   }
 
   public async Task<string> GetValue(string key, string defaultValue = "") {
