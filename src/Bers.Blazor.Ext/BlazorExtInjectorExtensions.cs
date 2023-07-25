@@ -12,6 +12,8 @@ public static class BlazorExtInjectorExtensions
   public static IServiceCollection AddBlazorExt(this IServiceCollection services) {
     services.AddScoped<IJsUtil,JsUtil>();
     services.AddScoped<IJsCookieUtil, JsCookieUtil>();
+    services.AddScoped<IJsSessionUtil, JsSessionUtil>();
+    services.AddScoped<IJsLocalStorageUtil, JsLocalStorageUtil>();
     return services;
   }
 
